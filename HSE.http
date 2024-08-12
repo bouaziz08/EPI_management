@@ -1,0 +1,6 @@
+@HSE_HostAddress = http://localhost:5280
+
+GET {{HSE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
