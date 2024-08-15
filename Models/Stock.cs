@@ -21,5 +21,6 @@ namespace HSE.Models
         public int IdEquipement { get; set; }
         [ForeignKey("Fournisseur")]
         public int IdFournisseur { get; set; }
+
     }
 }
