@@ -25,17 +25,17 @@ namespace HSE.Services
             return await _DemandeRepository.GetByIdAsync(id);
         }
     
-        public async Task AddAsync(Demande demande)
+        public async Task AddAsync(Demande demande, int pointure)
         {
 
-            /*var p = await _DemandeRepository.GetpointureAsync(pointure);
+            var p = await _DemandeRepository.GetpointureAsync(pointure);
 
             if (p == null)
             {
                 Console.WriteLine("ERRROR!!!!!!!!!!!!!!");
             }
-            else
-            {*/
+            else    
+            {
                 demande.Etat = "created";
 
                 await _DemandeRepository.AddAsync(demande);
@@ -52,7 +52,7 @@ namespace HSE.Services
                 };
     
             await _DemandeRepository.AddLogDemandeAsync(logdemande);
-           // }
+           }
 
         }
         

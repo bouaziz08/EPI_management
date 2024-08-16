@@ -9,5 +9,7 @@ namespace HSE.Repository
         Task AddAsync(Stock stock);
         Task UpdateAsync(Stock stock);
         Task AddLogStockAsync(LogStock logstock);
+        Task<Stock> GetBydateAsync(DateTime date);
     }
 }
+

@@ -20,7 +20,7 @@ namespace HSE.Repository
 
         public async Task<Demande> GetByIdAsync(int id)
         {
-            return await _context.Demandes.FirstOrDefaultAsync(p => p.IdDemande == id);
+            return await _context.Demandes.FindAsync(id);
         }
 
       

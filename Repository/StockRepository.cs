@@ -38,6 +38,11 @@ namespace HSE.Repository
             _context.LogStocks.Add(logstock);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Stock> GetBydateAsync(DateTime date)
+        {
+            return await _context.Stocks.FirstOrDefaultAsync(p => p.Date == date);
+        }
     }
 
 }
