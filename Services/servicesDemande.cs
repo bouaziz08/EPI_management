@@ -35,7 +35,7 @@ namespace HSE.Services
                 Console.WriteLine("ERRROR!!!!!!!!!!!!!!");
             }
             else    
-            {
+            {   demande.pointure = pointure;
                 demande.Etat = "created";
 
                 await _DemandeRepository.AddAsync(demande);

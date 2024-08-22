@@ -19,20 +19,21 @@ namespace HSE.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Getstock(int id)
         {
-            var demande = await _ServiceStock.GetByIdAsync(id);
-            Console.WriteLine("/****************/", demande, "/*******************************/");
-            if (demande == null)
+            var stock = await _ServiceStock.GetByIdAsync(id);
+            Console.WriteLine("/****************/", stock, "/*******************************/");
+            if (stock == null)
             {
                 return NotFound();
             }
-            return Ok(demande);
+            return Ok(stock);
         }
 
         ////////////////////////////////////////////////////////////////////
         [HttpPost]
-        public async Task<IActionResult> AjouterStock(Stock stock, int quantite_entre)
+        public async Task<IActionResult> AjouterStock(Stock stock, int id_equip, int quantite_entre)
         {
-            await _ServiceStock.AddAsync(stock, quantite_entre);
+            
+            await _ServiceStock.AddAsync(stock, id_equip, quantite_entre);
 
             return CreatedAtAction(nameof(Getstock), new { id = stock.IdStock }, stock);
 

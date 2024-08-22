@@ -5,6 +5,7 @@ namespace HSE.Repository
     public interface IStockRepository
     {
         Task<Stock> GetByIdAsync(int id);
+        Task<Stock> GetByEquipAsync(int idEquipement);
         Task<IEnumerable<Stock>> GetAllAsync();
         Task AddAsync(Stock stock);
         Task UpdateAsync(Stock stock);

@@ -8,8 +8,9 @@ namespace HSE.Services
         Task<IEnumerable<Stock>> GetAllAsync();
         // Task<Stock> GeteleBydateAsync(DateTime startdate, DateTime enddate);
 
+        Task<Stock> GetByEquipAsync(int id);
         Task<Stock> GetByIdAsync(int id);
-        Task AddAsync(Stock stock, int qe);
+        Task AddAsync(Stock stock, int id_equip, int qe);
         Task UpdateAsync(int id, int qs);
     }
 }

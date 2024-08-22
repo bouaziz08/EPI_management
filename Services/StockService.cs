@@ -29,11 +29,15 @@ namespace HSE.Services
         {
             return await _StockRepository.GetByIdAsync(id);
         }
-
-        public async Task AddAsync(Stock stock, int quantite_entre)
+        public async Task<Stock> GetByEquipAsync(int id)
         {
-
-            stock.StockActuelle += quantite_entre; 
+            return await _StockRepository.GetByEquipAsync(id);
+        }
+        public async Task AddAsync(Stock stock,int id_equi, int quantite_entre)
+        {
+            var stockold = await _StockRepository.GetByEquipAsync(id_equi);
+             
+            stock.StockActuelle = quantite_entre + stockold.StockActuelle;
             stock.QuantiteEntrer = quantite_entre;
             await _StockRepository.AddAsync(stock);
 
