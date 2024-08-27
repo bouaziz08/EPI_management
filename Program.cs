@@ -14,20 +14,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-
-
+builder.Services.AddCors();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.AddSecurityDefinition("oauth2", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    {
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
-    });
-    options.OperationFilter<SecurityRequirementsOperationFilter>();
-}
+builder.Services.AddSwaggerGen(//options =>
+//{
+//    options.AddSecurityDefinition("oauth2", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+//    {
+//        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+//        Name = "Authorization",
+//        Type = SecuritySchemeType.ApiKey
+//    });
+//    options.OperationFilter<SecurityRequirementsOperationFilter>();
+//}
 );
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
@@ -79,7 +78,7 @@ builder.Services.AddScoped<IDemandeService, servicesDemande>();
 
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<IStockService, StockService>();
-//builder.Services.AddScoped<ILdapAuthentication ,LdapAuthentication>();
+builder.Services.AddScoped<HSE.Services.LdapAuthentication>();
 
 builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
 
@@ -88,6 +87,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors(x => x
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed(origin => true) // allow any origin
+                                                //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins separated with comma
+            .AllowCredentials()); // allow credentials
     app.UseSwagger();
     app.UseSwaggerUI();
 }

@@ -21,7 +21,7 @@ namespace HSE.Repository
         public Tokens CreateToken(string username, string role, string preferredLanguage)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenKey = Encoding.UTF8.GetBytes(_configuration["JWT:Key"]);
+            var tokenKey = Encoding.UTF8.GetBytes("JWT:Ksfdggtuyiuhgzretryutryituoyiey");
 
             // Ensure tokenKey length is sufficient for the algorithm
             if (tokenKey.Length < 32)

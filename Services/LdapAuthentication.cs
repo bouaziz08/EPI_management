@@ -2,7 +2,7 @@
 
 namespace HSE.Services
 {
-    public class LdapAuthentication
+    public class LdapAuthentication : ILdapAuthentication
     {
         private string _path = "LDAP://dicastalma.com";
         private string domain = "dicastalma";

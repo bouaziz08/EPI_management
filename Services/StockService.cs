@@ -36,7 +36,7 @@ namespace HSE.Services
         public async Task AddAsync(Stock stock,int id_equi, int quantite_entre)
         {
             var stockold = await _StockRepository.GetByEquipAsync(id_equi);
-             
+            stock.IdEquipement = id_equi;
             stock.StockActuelle = quantite_entre + stockold.StockActuelle;
             stock.QuantiteEntrer = quantite_entre;
             await _StockRepository.AddAsync(stock);

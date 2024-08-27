@@ -1,11 +1,13 @@
 ﻿using HSE.Models.Auth;
 using HSE.Repository;
 using HSE.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HSE.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -17,16 +19,17 @@ namespace HSE.Controllers
             _ldapAuthentication = ldapAuthentication;
             _jwtManagerRepository = jWTManagerRepository;
         }
-        [HttpPost]
-        public  IActionResult Authenticate(string username, string password)
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public  IActionResult Authenticate(AuthRequest authRequest)
         {
-            bool isAuthenticated = _ldapAuthentication.IsAuthenticated(username, password);
+            bool isAuthenticated = _ldapAuthentication.IsAuthenticated(authRequest.username, authRequest.password);
             if (!isAuthenticated)
             {
                 return Unauthorized();
             }else
             {
-                Tokens tokens = _jwtManagerRepository.CreateToken(username, "jklfds", "fr");
+                Tokens tokens = _jwtManagerRepository.CreateToken(authRequest.username, "jklfds", "fr");
                 return Ok(tokens);
             }
         }
