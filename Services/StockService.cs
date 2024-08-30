@@ -18,14 +18,6 @@ namespace HSE.Services
             return await _StockRepository.GetAllAsync();
         }
 
-       /* public async Task<Stock> GeteleBydateAsync(DateTime sdate, DateTime edate)
-        {
-            var startdate = await _StockRepository.GetBydateAsync(sdate);
-            var enddate = await _StockRepository.GetBydateAsync(edate);
-
-            
-        }*/
-
         public async Task<Stock> GetByIdAsync(int id)
         {
             return await _StockRepository.GetByIdAsync(id);
@@ -61,12 +53,12 @@ namespace HSE.Services
             await _StockRepository.AddLogStockAsync(logstock);
         }
 
-        public async Task UpdateAsync(int id, int quantite_sortie)
+        public async Task UpdateAsync(int id, UpdateStockDTO UpdateStock)
         {
             var stock = await _StockRepository.GetByIdAsync(id);
-
-            stock.StockActuelle -= quantite_sortie;
-            stock.QuantiteSortie = quantite_sortie;
+            stock.IdEquipement = UpdateStock.IdEquipement;
+            stock.StockActuelle -= UpdateStock.QuantiteSortie;
+            stock.QuantiteSortie = UpdateStock.QuantiteSortie;
             await _StockRepository.UpdateAsync(stock);
 
             var logstock = new LogStock

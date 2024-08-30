@@ -42,7 +42,7 @@ namespace HSE.Controllers
         }
         ///////////////////////////////////////////////////////////////////
         [HttpPut("{id}")]
-        public async Task<IActionResult> modifierstock(int id, int quantite_sortie)
+        public async Task<IActionResult> modifierstock(int id, UpdateStockDTO UpdateStock)
         {
             var stock = await _ServiceStock.GetByIdAsync(id);
 
@@ -51,7 +51,7 @@ namespace HSE.Controllers
                 return BadRequest();
             }
 
-            await _ServiceStock.UpdateAsync(id, quantite_sortie);
+            await _ServiceStock.UpdateAsync(id, UpdateStock);
             return NoContent();
 
         }

@@ -12,6 +12,6 @@ namespace HSE.Services
         Task<Stock> GetByEquipAsync(int id);
         Task<Stock> GetByIdAsync(int id);
         Task AddAsync(AddStockDTO stockDTO);
-        Task UpdateAsync(int id, int qs);
+        Task UpdateAsync(int id, UpdateStockDTO updateStock);
     }
 }
