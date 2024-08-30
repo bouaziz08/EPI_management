@@ -1,4 +1,5 @@
 ﻿using HSE.Models;
+using HSE.NewFolder;
 using HSE.Repository;
 
 namespace HSE.Services
@@ -33,12 +34,19 @@ namespace HSE.Services
         {
             return await _StockRepository.GetByEquipAsync(id);
         }
-        public async Task AddAsync(Stock stock,int id_equi, int quantite_entre)
+        public async Task AddAsync(AddStockDTO stockDTO)
         {
-            var stockold = await _StockRepository.GetByEquipAsync(id_equi);
-            stock.IdEquipement = id_equi;
-            stock.StockActuelle = quantite_entre + stockold.StockActuelle;
-            stock.QuantiteEntrer = quantite_entre;
+            var stockold = await _StockRepository.GetByEquipAsync(stockDTO.IdEquipement);
+            Stock stock = new()
+            {
+                StockActuelle = stockDTO.QuantiteEntrer + stockold.StockActuelle,
+                QuantiteEntrer = stockDTO.QuantiteEntrer,
+                QuantiteSortie = 0,
+                StockSecurite = stockold.StockSecurite,
+                Date = DateTime.Now,
+                IdEquipement = stockold.IdEquipement,
+                IdFournisseur = stockold.IdFournisseur
+            };
             await _StockRepository.AddAsync(stock);
 
             var logstock = new LogStock

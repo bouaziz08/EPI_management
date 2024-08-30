@@ -1,4 +1,5 @@
 ﻿using HSE.Models;
+using HSE.NewFolder;
 using System.Threading.Tasks;
 
 namespace HSE.Services
@@ -10,7 +11,7 @@ namespace HSE.Services
 
         Task<Stock> GetByEquipAsync(int id);
         Task<Stock> GetByIdAsync(int id);
-        Task AddAsync(Stock stock, int id_equip, int qe);
+        Task AddAsync(AddStockDTO stockDTO);
         Task UpdateAsync(int id, int qs);
     }
 }

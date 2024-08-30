@@ -1,6 +1,7 @@
 ﻿using HSE.Models;
 using Microsoft.EntityFrameworkCore;
 using HSE.Repository;
+using HSE.NewFolder;
 
 namespace HSE.Services
 {
@@ -25,34 +26,41 @@ namespace HSE.Services
             return await _DemandeRepository.GetByIdAsync(id);
         }
     
-        public async Task AddAsync(Demande demande, int pointure)
+        public async Task AddAsync(AddDemandeDTO DemandeDTO)
         {
 
-            var p = await _DemandeRepository.GetpointureAsync(pointure);
+            var p = await _DemandeRepository.GetpointureAsync(DemandeDTO.Pointure);
 
             if (p == null)
             {
                 Console.WriteLine("ERRROR!!!!!!!!!!!!!!");
             }
-            else    
-            {   demande.pointure = pointure;
-                demande.Etat = "created";
-
+            else
+            {
+                Demande demande = new()
+                {
+                    MatriculeDemandeur = DemandeDTO.MatriculeDemandeur,
+                    nomequipement = DemandeDTO.nomequipement,
+                    Quantite = DemandeDTO.Quantite,
+                    pointure = DemandeDTO.Pointure,
+                    TypeDeDemande = DemandeDTO.TypeDeDemande,
+                    Etat = "created",
+                    DateDeDemande = DateTime.Now
+                };
                 await _DemandeRepository.AddAsync(demande);
-
                 var logdemande = new HistoriqueDeDemande
                 {
                     Action = "creation",
                     Etat = demande.Etat,
-                    nom_equip = demande.NomEquip,
+                    nom_equip = demande.nomequipement,
                     DateModification = DateTime.Now,
                     IdUtilisateur = demande.IdEmploye,
                     IdDemande = demande.IdDemande,
                     IdDemandeur = demande.IdUtilisateur
                 };
-    
             await _DemandeRepository.AddLogDemandeAsync(logdemande);
-           }
+           
+            }
 
         }
         
@@ -81,7 +89,7 @@ namespace HSE.Services
             {
                 Action = "Update",
                 Etat = demande.Etat,
-                nom_equip = demande.NomEquip,
+                nom_equip = demande.nomequipement,
                 DateModification = DateTime.Now,
                 IdUtilisateur = demande.IdEmploye,
                 IdDemande = demande.IdDemande,

@@ -1,4 +1,5 @@
 ﻿using HSE.Models;
+using HSE.NewFolder;
 using HSE.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -67,11 +68,11 @@ namespace HSE.Controllers
        
         ////////////////////////////////////////////////////////////////////
         [HttpPost]
-        public async Task<IActionResult> CreateDemande(Demande demande, int pointure)
+        public async Task<IActionResult> CreateDemande(AddDemandeDTO demandeDTO)
         {
-            await _ServiceDemande.AddAsync(demande, pointure);
+            await _ServiceDemande.AddAsync(demandeDTO);
 
-            return CreatedAtAction(nameof(GetDemande), new { id = demande.IdDemande }, demande);
+            return CreatedAtAction(nameof(GetDemande), new { id = demandeDTO.IdDemande }, demandeDTO);
 
         }
         ///////////////////////////////////////////////////////////////////

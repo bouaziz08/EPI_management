@@ -1,5 +1,6 @@
-﻿using HSE.Models;
+﻿using HSE.NewFolder;
 using HSE.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,13 +30,14 @@ namespace HSE.Controllers
         }
 
         ////////////////////////////////////////////////////////////////////
+        
         [HttpPost]
-        public async Task<IActionResult> AjouterStock(Stock stock, int id_equip, int quantite_entre)
+        public async Task<IActionResult> AjouterStock(AddStockDTO stockDTO)
         {
             
-            await _ServiceStock.AddAsync(stock, id_equip, quantite_entre);
+            await _ServiceStock.AddAsync(stockDTO);
 
-            return CreatedAtAction(nameof(Getstock), new { id = stock.IdStock }, stock);
+            return CreatedAtAction(nameof(Getstock), new { id = stockDTO.IdEquipement }, stockDTO);
 
         }
         ///////////////////////////////////////////////////////////////////

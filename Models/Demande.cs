@@ -10,7 +10,7 @@ namespace HSE.Models
         [Required]
         public string MatriculeDemandeur { get; set; }
         [Required]
-        public string NomEquip { get; set; }
+        public string nomequipement { get; set; }
         [Required]
         public int Quantite { get; set; }
         [Required]
