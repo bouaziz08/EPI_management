@@ -3,10 +3,10 @@
 This application helps in managing equipment, tracking their availability and assignments. The app is built using an ASP.NET Core REST API for the backend, React.js for the frontend, and SQL Server as the database.
 
 ## **Features**
-- **Equipment Tracking**: View and manage all individual pieces of equipment.
-- **Assignment Management**: Assign equipment to users and track who has what.
-- **Maintenance Scheduling**: Keep track of maintenance dates and reminders.
-- **Responsive Design**: Built with modern, responsive design principles.
+- **Demand Tracking**: Track demand of an equipment.
+- **Equipment management**: Assign equipment to users and track who has what.
+- **Update store**: track store and update quantity of every equipment.
+- **Display store details**: Dashboard to diplay details of every equipment.
 
 ---
 
@@ -22,7 +22,7 @@ This application helps in managing equipment, tracking their availability and as
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/equipment-management-app.git
+    git clone https://github.com/bouaziz08/EPI_management.git
     ```
 2. **Backend Setup (ASP.NET Core)**:
     - Navigate to the backend project folder:
@@ -64,10 +64,10 @@ This application helps in managing equipment, tracking their availability and as
 
 ## **Usage**
 
-1. **Dashboard**: View the list of all equipment, their status, and upcoming maintenance.
-2. **Add Equipment**: Add new equipment using the "Add Equipment" form.
+1. **Dashboard**: View the list of all equipment, their status.
+2. **Add Demand**: Add new Demand using the "Add Demand" form.
 3. **Assign Equipment**: Assign equipment to users and manage assignments.
-4. **View Maintenance Schedule**: Check upcoming maintenance dates for each piece of equipment.
+4. **View and maintain store**: Display details and update the store.
 
 ---
 
@@ -89,12 +89,6 @@ This application helps in managing equipment, tracking their availability and as
 - `DELETE /api/equipment/{id}`: Delete equipment.
 
 For more detailed API documentation, refer to the [API Docs](./api-docs.md).
-
----
-
-## **Contributing**
-
-We welcome contributions! If you'd like to add features or fix bugs, feel free to open a pull request.
 
 ---
 
